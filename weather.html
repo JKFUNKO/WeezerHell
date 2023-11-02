@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weethear</title>
+    <style>
+        body {
+            background-image: url('https://media.discordapp.net/attachments/1144882484794884148/1159593772057890826/71nYpzVCL._UF10001000_QL80_.png?ex=653196db&is=651f21db&hm=535189caed5e12e803bd1d0cc4a54e4040def91235930e257741af887c495cd3&=&width=603&height=605');
+            color: white;
+            text-align: center;
+        }
+
+        #weather-info,
+        #weather-image {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Weather App</h1>
+    <label for="location">Enter location:</label>
+    <input type="text" id="location">
+    <button onclick="getWeather()">Get Weather</button>
+    <div id="weather-info"></div>
+    <div id="weather-image"></div>
+
+    <script>
+        function getWeather() {
+            var locationInput = document.getElementById('location');
+            var apiKey = '08ac56aaa6ba4fad94a62002231110';
+            var location = locationInput.value || 'auto:ip'; // Use 'auto:ip' to get user's location by IP if no input
+
+            var apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var weatherInfo = `Location: ${data.location.name}, ${data.location.country}<br>
+                                       Current Temperature: ${data.current.temp_c}°C<br>
+                                       Condition: ${data.current.condition.text}<br>
+                                       Humidity: ${data.current.humidity}%<br>
+                                       Wind Speed: ${data.current.wind_kph} km/h`;
+
+                    document.getElementById('weather-info').innerHTML = weatherInfo;
+
+                    var weatherCode = data.current.condition.code;
+                    var weatherImage = '';
+                    var weatherMessage = '';
+
+                    if (weatherCode === 1000) {
+                        weatherImage = 'sunny.jpg';
+                        weatherMessage = 'It\'s sunny and hot!';
+                    } else if (weatherCode >= 1003 && weatherCode <= 1009) {
+                        weatherImage = 'cloudy.jpg';
+                        weatherMessage = 'It\'s cloudy.';
+                    } else if (weatherCode >= 1063 && weatherCode <= 1273) {
+                        weatherImage = 'rainy.jpg';
+                        weatherMessage = 'It\'s raining!';
+                    } else {
+                        weatherImage = 'default.jpg';
+                        weatherMessage = 'Weather conditions are varied.';
+                    }
+
+                    document.getElementById('weather-image').innerHTML = `<img src="${weatherImage}" alt="Weather Image">`;
+                    document.getElementById('weather-info').innerHTML += `<br>${weatherMessage}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('weather-info').innerHTML = 'Error fetching weather data.';
+                    document.getElementById('weather-image').innerHTML = '';
+                });
+        }
+
+        // Automatically get user's location when the page loads
+        window.onload = function() {
+            getWeather();
+        };
+    </script>
+    <a href="index.html"><img src ="https://media.discordapp.net/attachments/1144882484794884148/1161722536195788820/Weez_home.png?ex=6539556c&is=6526e06c&hm=cbe471e48a1fc801d845704a11b8b2e675e3fb0c9390dae56c9f5d84a28ea1fd&=&width=603&height=605" width="200px" height="200px" </a>
+</body>
+
+</html>

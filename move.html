@@ -1,0 +1,131 @@
+<head>
+    
+    <style>
+        #karel{
+            width: 100px;
+            z-index: 3;
+            position: relative;
+            top: 0px;
+            left: 0px;
+            
+        }
+        
+        #field{
+            width: 600px;
+            height: 600px;
+            background-color: #189bcc;
+            margin: auto;
+            
+        }
+        
+        #controls{
+            padding: 30px;
+            width: 200px;
+            margin: auto;
+        }
+        
+        button{
+            margin: 5px;
+            background-color: white;
+            border: 2px solid black;
+            font-size: 20px;
+        }
+        
+        button:hover{
+            background-color: #d6f5ff;
+        }
+        
+        h1{
+            text-align: center;
+            font-family: verdana;
+        }
+        
+        
+        
+    </style>
+    
+    
+    
+</head>
+
+<body>
+
+<h1>Move Rivers</h1>
+
+<div id="field">
+    <img id="karel" src="https://media.discordapp.net/attachments/1144882484794884148/1167139367089864784/Rivers.png?ex=654d0a3d&is=653a953d&hm=1abca5c9b89c71d61f764e458d1822ccd5b53704ed0c44bf7a05de359402f541&=" >
+
+</div>
+
+
+<div id="controls">
+    <button id="left" onclick="goLeft()">&#9664</button>
+    <button id="up" onclick="goUp()">&#9650</button>
+    <button id="down" onclick="goDown()">&#9660</button>
+    <button id="right" onclick="goRight()">&#9654</button>
+    
+</div>
+
+
+<script>
+
+    //Grab Karel 
+    let karel = document.getElementById("karel");
+    
+    //You need to set these with script or else the script
+    //doesn't read them as having a value idk 
+    karel.style.left = 0;
+    karel.style.top = 0;
+
+    
+    function goLeft(){
+        //get this as a number 
+        let x = parseFloat(karel.style.left);
+        
+        //check and see if Karel is on the grid
+        if(x > 0){
+            //move karel to the left 
+            karel.style.left = x - 100;
+        } else {
+            console.log("Karel Crashed into a wall!");
+            
+        }
+    }
+    
+    function goRight(){
+        let x = parseFloat(karel.style.left);
+        if(x < 500){
+            karel.style.left = x + 100;
+        } else {
+            console.log("Karel Crashed into a wall!");
+        }
+    }
+    
+    
+    function goUp(){
+        let y = parseFloat(karel.style.top);
+        if(y > 0){
+            karel.style.top = y - 100;
+        } else {
+            console.log("Karel Crashed into a wall!");
+        }
+    }
+    
+    
+    function goDown(){
+        let y = parseFloat(karel.style.top);
+        if(y < 500){
+            karel.style.top = y + 100;
+        } else {
+            console.log("Karel Crashed into a wall!");
+        }
+    }
+    
+    
+    
+</script>
+
+
+
+
+</body>
