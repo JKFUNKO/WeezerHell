@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club penguin!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("https://preview.redd.it/this-old-old-town-wait-a-second-v0-kldcc0kfqaca1.png?auto=webp&s=09eb685650c2ba563397eda1fa87d1f1397fbbff");
+            background-size: cover;
+        }
+
+        #movingImage {
+            position: absolute;
+            top:100px;
+        }
+        
+        #penguin1{
+          height:100px;
+            position: absolute;
+            top: 600px;
+            Right: 500px;
+        }
+        #penguin2{
+          height:80px;
+            position: absolute;
+            top: 600px;
+            Right: 400px;
+        }
+        #weather{
+            position:absolute;
+            right:1500px;
+        }
+        #temp{
+            position:absolute;
+            right:1500px;
+        }
+        #home{
+            position:absolute;
+            right:1800px;
+        }
+     
+    </style>
+</head>
+
+<body>
+    <img id="movingImage" src="https://media.discordapp.net/attachments/1144882484794884148/1167159534725370026/sit.png?ex=654d1d05&is=653aa805&hm=27bc9bb8423e4e0c64ba4a8f49c8e4516774a1dc37f2edd5223189663e7e2c23&=" alt="Moving Image">
+    <script src="script.js"></script>
+    <img id="penguin1" src = "https://media.discordapp.net/attachments/1144882484794884148/1168648419930288270/pinguim-penguin.gif?ex=655287a7&is=654012a7&hm=f230ca1ce0b9a024e28b952ca73c83967a7c83dc51a5312512cc063745a1fc40&=">
+        <img id="penguin2" src = "https://media.discordapp.net/attachments/1144882484794884148/1168648420966281267/c6702257ba9dbc49a2f07baa7d361ab8.gif">
+    <img id="weather" src = "https://media.discordapp.net/attachments/1144882484794884148/1169388078511693914/Untitled.png?ex=65553884&is=6542c384&hm=e850103c49a5953284ec822a4d3ba68c2ec7c991a05a37204a5e804e27b0154e&=" width="100px" height="100px">
+    <p id="temp">test</p>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Music Button</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-top: 50px; /* Adjust the top margin as needed */
+        }
+
+        #playButton {
+            margin-top: 20px; /* Adjust the top margin as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Click me to play music!</h3>
+
+    <!-- Button to play music -->
+    <button id="playButton">Play Music</button>
+
+    <script>
+        // JavaScript to play music when the button is clicked
+        document.getElementById('playButton').addEventListener('click', function() {
+            // URL of the music you want to play
+            var musicUrl = 'https://cdn.discordapp.com/attachments/1144882484794884148/1168651394115452958/Nostalgic_and_Relaxing_Club_Penguin_Music_70_Tracks_320_kbps.mp3?ex=65528a6c&is=6540156c&hm=e7cef3465079a708cc03d2e705bead50e498dcb6ac365cd58633c942d08a7f78&';
+
+            // Create an audio element
+            var audio = new Audio(musicUrl);
+
+            // Play the music
+            audio.play();
+            audio.stop();
+        });
+        
+        
+        
+        fetch('https://api.weatherapi.com/v1/current.json?key=08ac56aaa6ba4fad94a62002231110&q=Kelowna&aqi=no') 
+            .then(response => { 
+            	if (response.ok) { 
+            	return response.json(); // Parse the response data as JSON 
+        	} else { 
+            	throw new Error('API request failed'); 
+        	} 
+        }) 
+        .then(data => { 
+    	// Process the response data here 
+    	console.log(data.current.condition); // Example: Logging the data to the console 
+    	document.getElementById('weather').src = data.current.condition.icon;
+    	document.getElementById('temp').innerHTML = data.current.temp_c;
+        }) 
+        .catch(error => { 
+	    // Handle any errors here 
+	        console.error(error); // Example: Logging the error to the console 
+        });
+
+    </script>
+</body>
+
+</html>
+
+</body>
+           <a id="home" href="index.html"><img src ="https://files.catbox.moe/46ho8u.png" width="100px" height="100px" </a>
+</html>
